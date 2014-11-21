@@ -1,11 +1,11 @@
-
+#run_analysis.R
 ##Basic prerequisite
   
 The working directory must contain a directory called "UCI HAR Dataset" with the corresponding files and directories with the data from the Samsung smart-phone experiments.
 
-##Script run_analysis
+##Functional overview
 
-The script run_analysis processes the data and it stores a tidy data structure according to the csv format in the file "tidyData.txt" in the working directory. The script functions can be grouped in the following areas:
+The script run_analysis processes the data and it stores a tidy data frame according to the csv format in the file "tidyData.txt" in the working directory. The script functions can be grouped in the following areas:
 
 * Read the files and build a basic data frame
 
