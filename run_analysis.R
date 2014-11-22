@@ -32,7 +32,7 @@ dim(combTrainTest)
 if (all((colSums(is.na(combTrainTest))==0))){
   print(">>>>>>>>>>>>>>>>>>>>>>No missing data")
 } else print("there is missing data")
-
+str
 
 ##2- Define variable names and extract relevant variables into a subset data frame
 ###read the feature names, one line per component
@@ -48,7 +48,10 @@ featMeanStd <- featNames[grepl(matchMeanStd,featNames) & !grepl(matchMeanFreq,fe
 featMeanStd <- c("subject","activity",featMeanStd)
 ###subset of variables that contain subject, activity, mean and std
 subTrainTest <- combTrainTest[,featMeanStd]
-
+###Code the activity variable as factor
+actNames <- c("WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING")
+subTrainTest$activity <- as.factor(subTrainTest$activity)
+levels(subTrainTest$activity) <- actNames
 
 ##3-Organize the data into groups per subject and activities and calculate means
 ###Define a function to calculate average for a group
@@ -67,10 +70,6 @@ grpData <- ddply(subTrainTest,c("subject","activity"),avgGrp)
 
 
 ##4-Final clean up of column names
-###Code the activity variable as factor
-actNames <- c("WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING")
-grpData$activity <- as.factor(grpData$activity)
-levels(grpData$activity) <- actNames
 ###Change the duplicated string BodyBody into Body
 ###Change "BodyGyro" into "gyro"
 ###Remove periods
@@ -87,7 +86,6 @@ colNames <- gsub(pattern=matchPeriod,replacement="",x=colNames)
 colNames[-1:-2] <- paste(colNames[-1:-2],"mean",sep="")
 newColNames <- tolower(make.names(sub(pattern=matchPref, replacement="",x=colNames),unique=TRUE)) 
 colnames(grpData)<- newColNames
-
 
 ##5-Store the data frame as a text file
 write.table(x=grpData,file="tidyData.txt",row.names=FALSE)

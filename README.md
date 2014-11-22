@@ -47,7 +47,9 @@ The following steps are performed:
 
 5- Subset the original data frame to contain only the variables as defined in the previous step.
 
-The output here is a data frame with fewer columns(10299 rows and 68 columns) where are all variable names are based on the feature descriptions (excluding "subject", "activity" variables).
+6- The variable "activity" is transformed into a factor variable with six levels: "WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING"
+
+The output here is a data frame with fewer columns(10299 rows and 68 columns) where are all variable names are based on the feature descriptions (excluding "subject", "activity" variables). The variable activity is a factor with six levels.
  
 ###Organize the data into groups per subject and activities and calculate means
 
@@ -56,8 +58,6 @@ The function ddply (plyr) is used to split the data according to groups based on
 
 ###Clean up variable names
 The following steps are performed:
-
-* The variable "activity" is transformed into a factor variable with six levels: "WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING"
 
 The following steps are performed by defining the corresponding regular expression and using the sub command.  
 
