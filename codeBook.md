@@ -39,6 +39,8 @@ Each column represents one variable with a well defined name. The column 1 repre
 The data frame is stored as a text file.
 
 ##Code Book
+The variables are presented here in alphabetical order. 
+Each variable is described by its name (abbreviation), a complete description, its type and the corresponding value range.    
 The following variables are used:
 * activity
 	* Activities performed by a subject.
@@ -155,8 +157,8 @@ The following variables are used:
 	* A numeric variable with a real value.
 	
 * subject
-	Identity of the subject that participated in the experiment. There are thirty subjects. 
-	An integer with the values: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30.
+	* Identity of the subject that participated in the experiment. There are thirty subjects. 
+	* An integer with the values: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30.
 	
 * tbodyaccjerkmagmeanmean
 	* Mean of the means of the magnitude of the body acceleration jerk values per subject and activity. Defined in the time domain.
