@@ -5,7 +5,7 @@ The working directory must contain a directory called "UCI HAR Dataset" with the
 
 ##Functional overview
 
-The script run_analysis processes the data and it stores a tidy data frame according to the csv format in the file "tidyData.txt" in the working directory. The script functions can be grouped in the following areas:
+The script run_analysis processes the data and it stores a tidy data frame in the file "tidyData.txt" in the working directory. The script functions can be grouped in the following areas:
 
 * Read the files and build a basic data frame
 
@@ -21,9 +21,9 @@ The script run_analysis processes the data and it stores a tidy data frame accor
 
 The following steps are performed:
 
-1- Read the data from the "train" directory assuming that all columns are numeric (colClasses="numeric") in order to speed up the read.table(). The data is combined by columns (cbind) into a "train" data frame.
+1- Read the data from the "train" directory assuming that all columns are numeric (colClasses="numeric") in order to speed up the read.table() and there are no column names at the beginning. The data is combined by columns (cbind) into a "train" data frame.
  
-2- Read the data from the "test" directory assuming that all columns are numeric. The data is combined by columns (cbind) into a "test" data frame.
+2- Read the data from the "test" directory assuming that all columns are numeric (same as the previous). The data is combined by columns (cbind) into a "test" data frame.
 
 3- The test and train data frames are combined by rows (rbind) into a basic data frame with all the data.  
 
@@ -37,22 +37,22 @@ The output in this phase is a data frame with 10299 rows and 563 columns contain
 A requirement is to extract only the variables that describe the mean and the standard deviation of the measurements. Notice that the "mean frequency" is not included. 
 The following steps are performed:
 
--1 Read the feature names defined in the file "feature.txt" as the input for defining the symbolic variable names. There are 561 feature names.
+1- Read the feature names defined in the file "feature.txt" as the input for defining the symbolic variable names. There are 561 feature names.
 
--2 Define the symbolic variable names. The variable names are defined as the vector c("subject", "activity", featNames) where featNames is a vector with 561 feature names. That is, the variables now are named as "subject",activity" plus 561 variables defined according to the corresponding feature name. 
+2- Define the symbolic variable names. The variable names are defined as the vector c("subject", "activity", featNames) where featNames is a vector with 561 feature names. That is, the variables now are named as "subject",activity" plus 561 variables defined according to the corresponding feature name. 
 
--3 Define the column names in the data frame with the symbolic names defined in the previous step.
+3- Define the column names in the data frame with the symbolic names defined in the previous step.
 
--4 Use grepl with corresponding regular expression to find all variables that end with mean, std but exclude "meanFreq". The output is a logical vector.
+4- Use grepl with corresponding regular expression to find all variables that end with mean, std but exclude "meanFreq". The output is a logical vector.
 
--5 Subset the original data frame to contain only the variables as defined in the previous step.
+5- Subset the original data frame to contain only the variables as defined in the previous step.
 
 The output here is a data frame with fewer columns(10299 rows and 68 columns) where are all variable names are based on the feature descriptions (excluding "subject", "activity" variables).
  
 ###Organize the data into groups per subject and activities and calculate means
 
 In the original data each subject perform the different activities multiple times. The corresponding measurements are taken for each time. Now it is required to group the data per subscriber and activity and to calculate the corresponding mean for the variables for each subscriber, activity group.  
-The function ddply (plyr) is used to group the data according to c("subject", "activity")and to calculate the mean for each group. The output is a data frame with 180 rows and 68 columns.    
+The function ddply (plyr) is used to split the data according to groups based on c("subject", "activity"). Each group is presented to the function "avgGrp" that calculate the mean for each column in the group, it returns a data frame with the means.  In the end ddply puts together a data frame with 180 rows (one row for each group) and 68 columns.    
 
 ###Clean up variable names
 The following steps are performed:
@@ -63,17 +63,16 @@ The following steps are performed by defining the corresponding regular expressi
 
 * Change the duplicated string BodyBody into Body (sub)
 
-* Remove all periods from the variable names (use gsub)
+* Remove all periods from the variable names (gsub)
 
 * Remove the variable prefixes XNN (sub)
 
-* Add the suffix "mean" to each variable name using paste 
+* Add the suffix "mean" to each variable name (paste) 
 
 When all the steps are performed, the column names for the data frame are updated. 
 
 The output in this step is a data frame with 68 columns and 180 rows. The columns are defined with the variable names according to the aforementioned transformations.
 
 ###Store the resulting data frame as a text file
-The file is stored as a text file according to the csv format with the sep="," and row.names=FALSE.
-
-write.csv(grpData,file= "tidyData.txt",row.names=FALSE)
+The file is stored as a text file in the working directory using write.table with default parameters but with the parameter row.names=FALSE.
+write.table(x=grpData,file= "tidyData.txt",row.names=FALSE)
