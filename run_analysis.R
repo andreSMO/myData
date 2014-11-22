@@ -32,7 +32,6 @@ dim(combTrainTest)
 if (all((colSums(is.na(combTrainTest))==0))){
   print(">>>>>>>>>>>>>>>>>>>>>>No missing data")
 } else print("there is missing data")
-str
 
 ##2- Define variable names and extract relevant variables into a subset data frame
 ###read the feature names, one line per component
