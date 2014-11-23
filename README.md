@@ -21,9 +21,9 @@ The script run_analysis processes the data and it stores a tidy data frame in th
 
 The following steps are performed:
 
-1- Read the data from the "train" directory assuming that all columns are numeric (colClasses="numeric") in order to speed up the read.table() and there are no column names at the beginning. The data is combined by columns (cbind) into a "train" data frame.
+1- Read the data from the "train" directory (one file with subject id, one file with activity code and one file with features/measurements) using read.table() and assuming that all columns are numeric (colClasses="numeric") and there are no column names at the beginning. The data is combined by columns (cbind) into a "train" data frame.
  
-2- Read the data from the "test" directory assuming that all columns are numeric (same as the previous). The data is combined by columns (cbind) into a "test" data frame.
+2- Read the data from the "test" directory in the same way as above. The data is combined by columns (cbind) into a "test" data frame.
 
 3- The test and train data frames are combined by rows (rbind) into a basic data frame with all the data.  
 
