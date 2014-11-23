@@ -130,7 +130,7 @@ The following variables are used:
 	* Mean of the means of the magnitude of the gyroscope values per subject and activity. Defined in the frequency domain.
 	* A numeric variable with a real value.
 	
- * fgyromagstdmean
+* fgyromagstdmean
 	* Mean of the standard deviations of the magnitude for the gyroscope values per subject and activity. Defined in the frequency domain.
 	* A numeric variable with a real value.
 	
