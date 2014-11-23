@@ -30,18 +30,19 @@ The following steps are performed:
 The function called "getCombineCols" that has three files as input is used to perform the steps 1 and 2 above. Both steps follow the same sequence of operations but with different file names. The output is a data frame where the data is combined by columns. 
 
 In this phase, there is also a control if there are any NA values in the data. In this case, the result is false.
-The output in this phase is a data frame with 10299 rows and 563 columns containing the raw data. The variable names are default names assigned by R.
 
-###Define variable names and extract relevant variables into a subset data frame
+The output is a data frame with 10299 rows and 563 columns containing the raw data. The basic structure for the columns is that column 1 contains the identities of the subjects. Column 2 contains the activity codes. The other columns define the corresponding measurements (561). Note that the column names are default names assigned by R.
+
+###Define variable (column) names and extract relevant columns into a subset data frame
 
 A requirement is to extract only the variables that describe the mean and the standard deviation of the measurements. Notice that the "mean frequency" is not included. 
 The following steps are performed:
 
-1- Read the feature names defined in the file "feature.txt" as the input for defining the symbolic variable names. There are 561 feature names.
+1- Read the feature names defined in the file "feature.txt" as the input for defining the symbolic variable names. There are 561 measurement names.
 
-2- Define the symbolic variable names. The variable names are defined as the vector c("subject", "activity", featNames) where featNames is a vector with 561 feature names. That is, the variables now are named as "subject",activity" plus 561 variables defined according to the corresponding feature name. 
+2- Define the symbolic variable names. The variable names are defined as the vector c("subject", "activity", featNames) where featNames is a vector with 561 measurement names (or feature names). That is, the variables now are named as "subject",activity" plus 561 variables defined according to the corresponding measurement name. 
 
-3- Define the column names in the data frame with the symbolic names defined in the previous step.
+3- Define the column names in the data frame with the symbolic variable names defined in the previous step.
 
 4- Use grepl with corresponding regular expression to find all variables that end with mean, std but exclude "meanFreq". The output is a logical vector.
 
@@ -49,7 +50,7 @@ The following steps are performed:
 
 6- The variable "activity" is transformed into a factor variable with six levels: "WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING"
 
-The output here is a data frame with fewer columns(10299 rows and 68 columns) where are all variable names are based on the feature descriptions (excluding "subject", "activity" variables). The variable activity is a factor with six levels.
+The output here is a data frame with fewer columns(10299 rows and 68 columns) where are all column names are based on the measurement descriptions (excluding "subject", "activity" variables). The variable activity is a factor with six levels.
  
 ###Organize the data into groups per subject and activities and calculate means
 
