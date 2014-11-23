@@ -1,7 +1,7 @@
 #run_analysis.R
 ##Basic prerequisite
   
-The working directory must contain a directory called "UCI HAR Dataset" with the corresponding files and directories with the data from the Samsung smart-phone measurements.
+The working directory must contain a directory called "UCI HAR Dataset" with the corresponding files and directories with the data from the Samsung smart-phone measurements. This is a basic prerequisite for running the script.
 
 ##Functional overview
 
